@@ -1,0 +1,51 @@
+<div class="ucb-startup">
+  <form [formGroup]="ideaForm" (ngSubmit)="crearIdea()">
+    <input formControlName="titulo" placeholder="Título" />
+    <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
+  
+    <select formControlName="categoria">
+      <option value="">Seleccione Categoría</option>
+      <option value="tecnologia">Tecnología</option>
+      <option value="salud">Salud</option>
+      <option value="educacion">Educación</option>
+    </select>
+  
+    <select formControlName="estado">
+      <option value="">Seleccione Estado</option>
+      <option value="borrador">Borrador</option>
+      <option value="validando">Validando</option>
+      <option value="descartada">Descartada</option>
+    </select>
+  
+    <button type="submit">
+      {{ ideaForm.value.id ? 'Actualizar Idea' : 'Registrar Idea' }}
+    </button>
+  </form>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Categoría</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(idea of ideas; track idea){
+        <td>{{ idea.id }}</td>
+        <td>{{ idea.titulo }}</td>
+        <td>{{ idea.descripcion }}</td>
+        <td>{{ idea.categoria }}</td>
+        <td>{{ idea.estado }}</td>
+        <td>
+          <button (click)="editarIdea(idea)">Editar</button>
+          <button (click)="eliminarIdea(idea.id)">Eliminar</button>
+        </td>
+      }
+    </tbody>
+  </table>
+
+</div>
